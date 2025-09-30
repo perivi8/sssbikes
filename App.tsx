@@ -2,9 +2,10 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { CartProvider } from "./contexts/CartContext";
 import { useScrollToTop } from "./hooks/useScrollToTop";
+import ErrorBoundary from "./components/ErrorBoundary";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
@@ -26,32 +27,36 @@ const ScrollToTopWrapper = () => {
 };
 
 const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <CartProvider>
-        <Toaster />
-        <Sonner />
-        <BrowserRouter basename="/">
-          <ScrollToTopWrapper />
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/products/:productId" element={<ProductDetail />} />
-            <Route path="/bikes" element={<Bikes />} />
-            <Route path="/accessories" element={<Accessories />} />
-            <Route path="/accessories/:accessoryId" element={<AccessoryDetail />} />
-            <Route path="/support" element={<Support />} />
-            <Route path="/cart" element={<Cart />} />
-            <Route path="/checkout" element={<Checkout />} />
-            <Route path="/order-confirmation/:orderId" element={<OrderConfirmation />} />
-            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </BrowserRouter>
-      </CartProvider>
-    </TooltipProvider>
-  </QueryClientProvider>
+  <ErrorBoundary>
+    <QueryClientProvider client={queryClient}>
+      <TooltipProvider>
+        <CartProvider>
+          <Toaster />
+          <Sonner />
+          <BrowserRouter basename="/">
+            <ScrollToTopWrapper />
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/home" element={<Navigate to="/" replace />} />
+              <Route path="/shop" element={<Navigate to="/" replace />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/products/:productId" element={<ProductDetail />} />
+              <Route path="/bikes" element={<Bikes />} />
+              <Route path="/accessories" element={<Accessories />} />
+              <Route path="/accessories/:accessoryId" element={<AccessoryDetail />} />
+              <Route path="/support" element={<Support />} />
+              <Route path="/cart" element={<Cart />} />
+              <Route path="/checkout" element={<Checkout />} />
+              <Route path="/order-confirmation/:orderId" element={<OrderConfirmation />} />
+              {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </BrowserRouter>
+        </CartProvider>
+      </TooltipProvider>
+    </QueryClientProvider>
+  </ErrorBoundary>
 );
 
 export default App;

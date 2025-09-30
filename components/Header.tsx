@@ -30,7 +30,7 @@ const Header = () => {
           <Link to="/" className={`text-sm font-medium hover:text-primary transition-colors ${
             isActive('/') ? 'text-primary font-semibold' : ''
           }`}>
-            Shop
+            Home
           </Link>
           <Link to="/bikes" className={`text-sm font-medium hover:text-primary transition-colors ${
             isActive('/bikes') ? 'text-primary font-semibold' : ''
@@ -99,7 +99,7 @@ const Header = () => {
               }`}
               onClick={() => setMobileMenuOpen(false)}
             >
-              Shop
+              Home
             </Link>
             <Link
               to="/bikes"
