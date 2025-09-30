@@ -41,10 +41,10 @@ const Home = () => {
           
           <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="max-w-3xl">
-              <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tighter mb-6 text-gradient bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 bg-clip-text text-transparent">
+              <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tighter mb-6 text-white drop-shadow-2xl">
                 Ride Into the Future
               </h1>
-              <p className="text-xl sm:text-2xl mb-8 text-orange-400 font-bold">
+              <p className="text-xl sm:text-2xl mb-8 text-gray-100 font-semibold drop-shadow-lg">
                 Experience the perfect blend of cutting-edge technology and sustainable design with SSS Motors.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
