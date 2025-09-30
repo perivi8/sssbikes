@@ -41,11 +41,19 @@ const Home = () => {
           
           <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="max-w-3xl">
-              <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tighter mb-6 text-white drop-shadow-2xl">
-                Ride Into the Future
+              <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tighter mb-6 text-white hero-text-shadow">
+                {"Ride Into the Future".split("").map((char, index) => (
+                  <span key={index} style={{ animationDelay: `${index * 0.05}s` }}>
+                    {char === " " ? "\u00A0" : char}
+                  </span>
+                ))}
               </h1>
-              <p className="text-xl sm:text-2xl mb-8 text-gray-100 font-semibold drop-shadow-lg">
-                Experience the perfect blend of cutting-edge technology and sustainable design with SSS Motors.
+              <p className="text-xl sm:text-2xl mb-8 text-gray-100 font-semibold hero-text-shadow">
+                {"Experience the perfect blend of cutting-edge technology and sustainable design with SSS Motors.".split("").map((char, index) => (
+                  <span key={index} style={{ animationDelay: `${index * 0.02}s` }}>
+                    {char === " " ? "\u00A0" : char}
+                  </span>
+                ))}
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
                 <Button 
