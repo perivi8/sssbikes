@@ -4,7 +4,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { useCart } from "@/contexts/CartContext";
-import { formatIndianPrice, convertUSDToINR, formatIndianCurrency } from "@/utils/currency";
+import { formatIndianPrice, formatIndianCurrency } from "@/utils/currency";
 
 const Cart = () => {
   const { state, updateQuantity, removeItem } = useCart();

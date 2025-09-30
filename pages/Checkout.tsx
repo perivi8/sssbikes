@@ -10,7 +10,7 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useCart } from "@/contexts/CartContext";
 import { toast } from "sonner";
-import { formatIndianPrice, convertUSDToINR, formatIndianCurrency } from "@/utils/currency";
+import { formatIndianPrice, formatIndianCurrency } from "@/utils/currency";
 
 interface ShippingAddress {
   fullName: string;
@@ -51,7 +51,7 @@ const Checkout = () => {
 
   // GST calculation (18% for India)
   const GST_RATE = 0.18;
-  const subtotalINR = convertUSDToINR(state.total);
+  const subtotalINR = state.total; // Prices are already in INR
   const gstAmount = subtotalINR * GST_RATE;
   const total = subtotalINR + gstAmount;
 
