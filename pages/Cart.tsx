@@ -4,6 +4,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { useCart } from "@/contexts/CartContext";
+import { formatIndianPrice, convertUSDToINR, formatIndianCurrency } from "@/utils/currency";
 
 const Cart = () => {
   const { state, updateQuantity, removeItem } = useCart();
@@ -58,7 +59,7 @@ const Cart = () => {
                   
                   <div className="flex-1">
                     <h3 className="font-semibold text-lg">{item.name}</h3>
-                    <p className="text-muted-foreground">${item.price.toLocaleString()}</p>
+                    <p className="text-muted-foreground">{formatIndianPrice(item.price)}</p>
                   </div>
                   
                   <div className="flex items-center gap-3">
@@ -98,7 +99,7 @@ const Cart = () => {
                   
                   <div className="text-right">
                     <p className="font-semibold text-lg">
-                      ${(item.price * item.quantity).toLocaleString()}
+                      {formatIndianPrice(item.price * item.quantity)}
                     </p>
                   </div>
                 </div>
@@ -113,7 +114,7 @@ const Cart = () => {
                 <div className="space-y-3 mb-6">
                   <div className="flex justify-between">
                     <span>Subtotal ({state.itemCount} items)</span>
-                    <span>${state.total.toLocaleString()}</span>
+                    <span>{formatIndianPrice(state.total)}</span>
                   </div>
                   <div className="flex justify-between">
                     <span>Shipping</span>
@@ -122,7 +123,7 @@ const Cart = () => {
                   <hr className="border-border" />
                   <div className="flex justify-between text-lg font-semibold">
                     <span>Total</span>
-                    <span>${state.total.toLocaleString()}</span>
+                    <span>{formatIndianPrice(state.total)}</span>
                   </div>
                 </div>
                 

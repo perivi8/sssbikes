@@ -4,6 +4,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { formatIndianPrice, formatIndianCurrency } from "@/utils/currency";
 
 interface OrderDetails {
   orderId: string;
@@ -158,12 +159,12 @@ const OrderConfirmation = () => {
                           Quantity: {item.quantity}
                         </p>
                         <p className="text-sm text-muted-foreground">
-                          Price: ${item.price.toLocaleString()} each
+                          Price: {formatIndianPrice(item.price)} each
                         </p>
                       </div>
                       <div className="text-right">
                         <p className="font-semibold">
-                          ${(item.price * item.quantity).toLocaleString()}
+                          {formatIndianPrice(item.price * item.quantity)}
                         </p>
                       </div>
                     </div>
@@ -202,7 +203,7 @@ const OrderConfirmation = () => {
                   <div className="space-y-3">
                     <div className="flex justify-between">
                       <span>Subtotal</span>
-                      <span>${orderDetails.subtotal.toLocaleString()}</span>
+                      <span>{formatIndianCurrency(orderDetails.subtotal)}</span>
                     </div>
                     <div className="flex justify-between">
                       <span>Shipping</span>
@@ -210,12 +211,12 @@ const OrderConfirmation = () => {
                     </div>
                     <div className="flex justify-between">
                       <span>GST (18%)</span>
-                      <span>${orderDetails.gstAmount.toFixed(2)}</span>
+                      <span>{formatIndianCurrency(orderDetails.gstAmount)}</span>
                     </div>
                     <hr className="border-border" />
                     <div className="flex justify-between text-lg font-semibold">
                       <span>Total Paid</span>
-                      <span>${orderDetails.total.toFixed(2)}</span>
+                      <span>{formatIndianCurrency(orderDetails.total)}</span>
                     </div>
                   </div>
                 </CardContent>

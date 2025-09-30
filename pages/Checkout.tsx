@@ -10,6 +10,7 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useCart } from "@/contexts/CartContext";
 import { toast } from "sonner";
+import { formatIndianPrice, convertUSDToINR, formatIndianCurrency } from "@/utils/currency";
 
 interface ShippingAddress {
   fullName: string;
@@ -50,9 +51,9 @@ const Checkout = () => {
 
   // GST calculation (18% for India)
   const GST_RATE = 0.18;
-  const subtotal = state.total;
-  const gstAmount = subtotal * GST_RATE;
-  const total = subtotal + gstAmount;
+  const subtotalINR = convertUSDToINR(state.total);
+  const gstAmount = subtotalINR * GST_RATE;
+  const total = subtotalINR + gstAmount;
 
   const handleInputChange = (field: keyof ShippingAddress, value: string) => {
     setShippingAddress(prev => ({
@@ -120,7 +121,7 @@ const Checkout = () => {
         orderDetails: {
           orderId,
           items: state.items,
-          subtotal,
+          subtotal: subtotalINR,
           gstAmount,
           total,
           shippingAddress,
@@ -312,7 +313,7 @@ const Checkout = () => {
                         <p className="font-medium">{item.name}</p>
                         <p className="text-sm text-muted-foreground">Qty: {item.quantity}</p>
                       </div>
-                      <p className="font-medium">${(item.price * item.quantity).toLocaleString()}</p>
+                      <p className="font-medium">{formatIndianPrice(item.price * item.quantity)}</p>
                     </div>
                   ))}
                 </div>
@@ -323,7 +324,7 @@ const Checkout = () => {
                 <div className="space-y-3 mb-6">
                   <div className="flex justify-between">
                     <span>Subtotal ({state.itemCount} items)</span>
-                    <span>${subtotal.toLocaleString()}</span>
+                    <span>{formatIndianCurrency(subtotalINR)}</span>
                   </div>
                   <div className="flex justify-between">
                     <span>Shipping</span>
@@ -331,12 +332,12 @@ const Checkout = () => {
                   </div>
                   <div className="flex justify-between">
                     <span>GST (18%)</span>
-                    <span>${gstAmount.toFixed(2)}</span>
+                    <span>{formatIndianCurrency(gstAmount)}</span>
                   </div>
                   <hr className="border-border" />
                   <div className="flex justify-between text-lg font-semibold">
                     <span>Total</span>
-                    <span>${total.toFixed(2)}</span>
+                    <span>{formatIndianCurrency(total)}</span>
                   </div>
                 </div>
                 
