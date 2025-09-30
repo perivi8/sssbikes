@@ -31,7 +31,7 @@ const App = () => (
       <CartProvider>
         <Toaster />
         <Sonner />
-        <BrowserRouter>
+        <BrowserRouter basename="/">
           <ScrollToTopWrapper />
           <Routes>
             <Route path="/" element={<Home />} />
